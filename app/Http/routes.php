@@ -12,5 +12,11 @@
 */
 
 $app->get('/', function () use ($app) {
-    return $app->version();
+    return 'Base Url';
+});
+$app->get('split', function () {
+    return 'SplitPDF';
+});
+$app->get('join', function () {
+    return 'JoinPDF';
 });
