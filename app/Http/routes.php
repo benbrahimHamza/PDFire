@@ -20,3 +20,5 @@ $app->get('split', function () {
 $app->get('join', function () {
     return 'JoinPDF';
 });
+
+$app->post('upload_file', 'UploadController@upload');
