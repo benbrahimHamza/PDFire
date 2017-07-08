@@ -14,9 +14,9 @@
 $app->get('/', function () use ($app) {
     return 'Base Url';
 });
-$app->get('split', function () {
-    return 'SplitPDF';
-});
-$app->get('join', function () {
-    return 'JoinPDF';
+
+$app->post('split', 'Controller@split_pdf');
+
+$app->get('join', function () use ($app) {
+    return split_pdf();
 });
