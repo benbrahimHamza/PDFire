@@ -8,11 +8,23 @@ class Controller extends BaseController
 {
     // Split PDF file
     function split_pdf() {
+      // TODO: give paths through configuration file instead of hard coding them here
+      $filePath = './uploads/';
+
+      if(!is_dir($filePath)){
+         return response('Upload folder doesn\'t exist');
+      }
       // Setup the directory name writing
       $fileName = $_POST['fileName'];
+      $filePath .= $fileName . '.pdf';
+      if(!file_exists($filePath)){
+        return response('File not found in the upload folder');
+      }
+
+      // Getting interval of pages to split from the original file
       $firstPage = $_POST['firstPage'];
       $lastPage = $_POST['lastPage'];
-      $filePath = './upload/' . $fileName . '.pdf';
+
       $end_directory = false;
     	$end_directory = $end_directory ? $end_directory : './splittedPDFFiles/';
 
@@ -39,5 +51,9 @@ class Controller extends BaseController
     		}
             $pdf->close();
     	}
+    }
+
+    public function join_pdf() {
+      return 'JoinPDF';
     }
 }
