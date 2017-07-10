@@ -3,22 +3,23 @@
 namespace App\Http\Controllers;
 
 use Laravel\Lumen\Routing\Controller as BaseController;
+use App\Config;
+use App\Errors;
 
 class Controller extends BaseController
 {
     // Split PDF file
     function split_pdf() {
-      // TODO: give paths through configuration file instead of hard coding them here
-      $filePath = './uploads/';
+      $filePath = Config::UPLOAD_PATH;
 
       if(!is_dir($filePath)){
-         return response('Upload folder doesn\'t exist');
+         return response(Errors::SPLIT_MISSING_FOLDER_ERROR, '404');
       }
       // Setup the directory name writing
       $fileName = $_POST['fileName'];
       $filePath .= $fileName . '.pdf';
       if(!file_exists($filePath)){
-        return response('File not found in the upload folder');
+        return response(Errors::SPLIT_MISSING_FILE_ERROR, '404');
       }
 
       // Getting interval of pages to split from the original file
@@ -26,7 +27,7 @@ class Controller extends BaseController
       $lastPage = $_POST['lastPage'];
 
       $end_directory = false;
-    	$end_directory = $end_directory ? $end_directory : './splittedPDFFiles/';
+    	$end_directory = $end_directory ? $end_directory : Config::FILE_PARTS_PATH;
 
       if (!is_dir($end_directory))
     	{
@@ -51,6 +52,7 @@ class Controller extends BaseController
     		}
             $pdf->close();
     	}
+      return response(Config::SUCCESS_MESSAGE, '201');
     }
 
     public function join_pdf() {

@@ -11,6 +11,7 @@ namespace App;
 
 class Config
 {
-    const UPLAOD_PATH = './uploads/';
-
+    const UPLOAD_PATH = './uploads/';
+    const FILE_PARTS_PATH = './splittedPDFFiles/';
+    const SUCCESS_MESSAGE = 'Operation Successful';
 }
