@@ -56,6 +56,39 @@ class Controller extends BaseController
     }
 
     public function join_pdf() {
-      return 'JoinPDF';
+      // Each directory will be specific to one user
+      $polyName = $_POST['polyName'] . '.pdf';
+      $dirPath = Config::FILE_PARTS_PATH;
+      $pdf = new \FPDI();
+      $return_array = array();
+      // Get all the fileNames in a specific directory
+      if(is_dir($dirPath)){
+        if($dh = opendir($dirPath)){
+          while(($file = readdir($dh)) != false){
+            if($file == "." or $file == ".."){
+              //Implement next
+            } else {
+                $return_array[] = $dirPath . $file; // Add the file to the array
+            }
+          }
+        }
+      }
+      try {
+          // Merge all files found in the merged folder
+          foreach ($return_array as $fileToMerge) {
+            $pageCount = $pdf->setSourceFile($fileToMerge);
+            for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
+               $tplIdx = $pdf->ImportPage($pageNo);
+               $s = $pdf->getTemplatesize($tplIdx);
+               $pdf->AddPage($s['w'] > $s['h'] ? 'L' : 'P', array($s['w'], $s['h']));
+               $pdf->useTemplate($tplIdx);
+             }
+          }
+          $pdf->Output($polyName, 'F');
+          $pdf->close();
+      } catch (Exception $e) {
+  			echo 'Caught exception: ',  $e->getMessage(), "\n";
+      }
+      return response(Config::SUCCESS_MESSAGE, '201');
     }
 }
