@@ -20,3 +20,5 @@ $app->post('split', 'Controller@split_pdf');
 $app->post('join', 'Controller@join_pdf');
 
 $app->post('upload_file', 'UploadController@upload');
+
+$app->post('upload_base64', 'UploadController@upload_base64');
