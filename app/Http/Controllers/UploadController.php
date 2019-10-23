@@ -19,11 +19,10 @@ class UploadController extends BaseController
 
     public function upload(Request $request)
     {
+        $pdfFile = $request->file('pdf_file');
         // Check for the pdf
-        if (!($request->hasFile('pdf_file'))) {
+        if (is_null($pdfFile)) {
             return response(Errors::UPLOAD_FILE_MISSING_ERROR, '404');
-        } else {
-          $pdfFile = $request->file('pdf_file');
         }
 
         // Upload problem
