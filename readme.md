@@ -1,21 +1,47 @@
-## Lumen PHP Framework
+# PDFire
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+PDFire is a lumen application that can split and isolate any PDF file and extract only the needed parts.
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+## Installation
 
-## Official Documentation
+No installation needed, but is tested via the console command that follows :
 
-Documentation for the framework can be found on the [Lumen website](http://lumen.laravel.com/docs).
+```bash
+php -S localhost:8000 -t public
+```
 
-## Security Vulnerabilities
+## Usage
+### Exctraction
+To extract page 3 to 6 from a previously uploaded file named 
+```javascript
+{
+  "fileName" : "file_name",
+  "firstPage" : 3,
+  "lastPage" : 6
+}
+```
+### Merge
+To merge the pages that have been extracted into a file named fused_file_name.pdf, only specify final file name of fused pages.
+```javascript
+{
+  "polyName" : "fused_file_name",
+}
+```
+### File upload
+To upload a file just specify the file and it'll upload it into the correct folder
+```javascript
+{
+  "fileName" : "file_name",
+  "firstPage" : 3,
+  "lastPage" : 6
+}
+```
+### 
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-### License
+Please make sure to update tests as appropriate.
 
-The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
