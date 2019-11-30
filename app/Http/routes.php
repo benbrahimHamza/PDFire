@@ -11,8 +11,8 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-    return 'Base Url';
+$app->get('/', function () {
+    return view('main', []);
 });
 
 $app->post('split', 'Controller@split_pdf');
